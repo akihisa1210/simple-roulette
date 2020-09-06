@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/akihisa1210/simple-roulette/issues"
   },
-  "homepage": "https://github.com/akihisa1210/simple-roulette#readme"
+  "homepage": "https://github.com/akihisa1210/simple-roulette#readme",
+  "devDependencies": {
+    "eslint": "^7.8.1",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "^2.1.1"
+  }
 }
