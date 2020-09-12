@@ -11,6 +11,17 @@ jobs:
         uses: actions/setup-node@v1.3.0
         with:
           node-versions: 12.x
+      - name: Get NPM cache directory
+        id: npm-cache
+        run: |
+          echo "::set-output name=dir::$(npm config get cache)"
+      - name: Cache NPM
+        uses: actions/cache@v1.1.0
+        with:
+          path: ${{ steps.npm-cache.outputs.dir }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
       - name: Install dependencies
         run: npm ci
       - name: lint
@@ -24,9 +35,32 @@ jobs:
       uses: actions/setup-node@v1.3.0
       with:
         node-versions: 12.x
+    - name: Get NPM cache directory
+      id: npm-cache
+      run: |
+        echo "::set-output name=dir::$(npm config get cache)"
+    - name: Cache NPM
+      uses: actions/cache@v1.1.0
+      with:
+        path: ${{ steps.npm-cache.outputs.dir }}
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
     - name: Install dependencies
       run: npm ci
     - name: Build test environment
       run: docker-compose up -d
     - name: e2e
       run: npm run cypress:run
+    - name: Upload error screenshots
+      if: ${{ failure() }}
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: screenshots
+        path: /home/runner/work/simple-roulette/simple-roulette/cypress/screenshots
+    - name: Upload videos
+      if: ${{ always() }}
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: videos
+        path: /home/runner/work/simple-roulette/simple-roulette/cypress/videos

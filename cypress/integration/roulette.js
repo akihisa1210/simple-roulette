@@ -9,14 +9,13 @@ describe("Roulette", () => {
     cy.visit("localhost:8080");
     cy.get("#candidate-area").type("candidate1");
     cy.get("#pick").click();
-    cy.get("#result-area").should("contain", "candidate1");
+    cy.get("#result-area").contains("candidate1");
   });
 
   it("displays one of the candidates when there are two candidates", () => {
     cy.visit("localhost:8080");
     cy.get("#candidate-area").type("candidate1\ncandidate2");
     cy.get("#pick").click();
-    cy.get("#result-area").should("contain", "candidate1" || "candidate2");
-    cy.get("#result-area").should("not.contain", "candidate1" && "candidate2");
+    cy.get("#result-area").contains(/candidate1|candidate2/g);
   });
 });
