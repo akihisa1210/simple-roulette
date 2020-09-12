@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
+    "cypress:open": "cypress open",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,8 +19,10 @@
   },
   "homepage": "https://github.com/akihisa1210/simple-roulette#readme",
   "devDependencies": {
+    "cypress": "^5.1.0",
     "eslint": "^7.8.1",
     "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-cypress": "^2.11.1",
     "eslint-plugin-prettier": "^3.1.4",
     "prettier": "^2.1.1"
   }
