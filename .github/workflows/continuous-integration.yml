@@ -52,3 +52,13 @@ jobs:
       run: docker-compose up -d
     - name: e2e
       run: npm run cypress:run
+    - name: Upload error screenshots
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: screenshots
+        path: /home/runner/work/simple-roulette/simple-roulette/cypress/screenshots
+    - name: Upload error videos
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: videos
+        path: /home/runner/work/simple-roulette/simple-roulette/cypress/videos
