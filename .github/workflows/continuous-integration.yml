@@ -53,11 +53,13 @@ jobs:
     - name: e2e
       run: npm run cypress:run
     - name: Upload error screenshots
+      if: ${{ failure() }}
       uses: actions/upload-artifact@v1.0.0
       with:
         name: screenshots
         path: /home/runner/work/simple-roulette/simple-roulette/cypress/screenshots
-    - name: Upload error videos
+    - name: Upload videos
+      if: ${{ always() }}
       uses: actions/upload-artifact@v1.0.0
       with:
         name: videos
