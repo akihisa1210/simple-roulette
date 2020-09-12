@@ -15,3 +15,18 @@ jobs:
         run: npm ci
       - name: lint
         run: npm run lint
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2.0.0
+    - name: Setup Node.js 12.x
+      uses: actions/setup-node@v1.3.0
+      with:
+        node-versions: 12.x
+    - name: Install dependencies
+      run: npm ci
+    - name: Build test environment
+      run: docker-compose up -d
+    - name: e2e
+      run: npm run cypress:run
