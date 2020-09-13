@@ -8,7 +8,7 @@
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "docker-compose up -d"
+    "start": "docker-compose up"
   },
   "repository": {
     "type": "git",
