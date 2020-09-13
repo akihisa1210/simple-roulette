@@ -6,7 +6,8 @@ https://akihisa1210.github.io/simple-roulette/public/
 
 ## Development
 
+### Start local server (docker-compose is required)
 ```
-# Start local server (docker-compose is required)
-npm start
+npm start 
 ```
+If you want to delete the resources completly, run `docker-compose down` after the local server is stopped.
