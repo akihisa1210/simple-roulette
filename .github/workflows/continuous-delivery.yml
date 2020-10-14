@@ -8,9 +8,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2.0.0
       - name: Setup Node.js 12.x
-        uses: actions/setup-node@v1.3.0
+        uses: actions/setup-node@v1.4.4
         with:
-          node-versions: 12.x
+          node-version: 12.x
       - name: Get NPM cache directory
         id: npm-cache
         run: |
@@ -33,9 +33,9 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2.0.0
     - name: Setup Node.js 12.x
-      uses: actions/setup-node@v1.3.0
+      uses: actions/setup-node@v1.4.4
       with:
-        node-versions: 12.x
+        node-version: 12.x
     - name: Get NPM cache directory
       id: npm-cache
       run: |
@@ -73,7 +73,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2.0.0
     - name: Setup Node.js 12.x
-      uses: actions/setup-node@v1.3.0
+      uses: actions/setup-node@v1.4.4
       with:
         node-versions: 12.x
     - name: Get NPM cache directory
@@ -90,7 +90,7 @@ jobs:
     - name: Install dependencies
       run: npm ci
     - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
+      uses: peaceiris/actions-gh-pages@v3.7.1
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./public
