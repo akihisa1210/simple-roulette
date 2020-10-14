@@ -8,7 +8,8 @@
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "docker-compose up"
+    "start": "docker-compose up",
+    "deploy": "gh-pages -d public"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-cypress": "^2.11.1",
     "eslint-plugin-prettier": "^3.1.4",
+    "gh-pages": "^3.1.0",
     "prettier": "^2.1.1"
   }
 }
