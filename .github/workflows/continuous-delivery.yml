@@ -1,4 +1,4 @@
-name: Continuous Integration
+name: Continuous Delivery
 on: [push]
 
 jobs:
@@ -8,9 +8,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2.0.0
       - name: Setup Node.js 12.x
-        uses: actions/setup-node@v1.3.0
+        uses: actions/setup-node@v1.4.4
         with:
-          node-versions: 12.x
+          node-version: 12.x
       - name: Get NPM cache directory
         id: npm-cache
         run: |
@@ -27,14 +27,15 @@ jobs:
       - name: lint
         run: npm run lint
   e2e:
+    needs: lint
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
       uses: actions/checkout@v2.0.0
     - name: Setup Node.js 12.x
-      uses: actions/setup-node@v1.3.0
+      uses: actions/setup-node@v1.4.4
       with:
-        node-versions: 12.x
+        node-version: 12.x
     - name: Get NPM cache directory
       id: npm-cache
       run: |
@@ -64,3 +65,32 @@ jobs:
       with:
         name: videos
         path: /home/runner/work/simple-roulette/simple-roulette/cypress/videos
+  deploy:
+    needs: e2e
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2.0.0
+    - name: Setup Node.js 12.x
+      uses: actions/setup-node@v1.4.4
+      with:
+        node-versions: 12.x
+    - name: Get NPM cache directory
+      id: npm-cache
+      run: |
+        echo "::set-output name=dir::$(npm config get cache)"
+    - name: Cache NPM
+      uses: actions/cache@v1.1.0
+      with:
+        path: ${{ steps.npm-cache.outputs.dir }}
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+    - name: Install dependencies
+      run: npm ci
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3.7.1
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./public
