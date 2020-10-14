@@ -67,7 +67,7 @@ jobs:
         path: /home/runner/work/simple-roulette/simple-roulette/cypress/videos
   deploy:
     needs: e2e
-    # if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
