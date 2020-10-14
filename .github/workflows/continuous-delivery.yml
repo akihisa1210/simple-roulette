@@ -75,7 +75,7 @@ jobs:
     - name: Setup Node.js 12.x
       uses: actions/setup-node@v1.4.4
       with:
-        node-versions: 12.x
+        node-version: 12.x
     - name: Get NPM cache directory
       id: npm-cache
       run: |
