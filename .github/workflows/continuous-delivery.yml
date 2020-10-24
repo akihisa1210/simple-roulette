@@ -80,7 +80,7 @@ jobs:
     - name: Install dependencies
       run: npm ci
     - name: Donwload build artifact
-      uses: actions/download@v2.0.0
+      uses: actions/download-artifact@v2
       with:
         name: dist
         path: /home/runner/work/simple-roulette/simple-roulette
@@ -106,7 +106,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Donwload build artifact
-      uses: actions/download@v2.0.0
+      uses: actions/download-artifact@v2
       with:
         name: dist
         path: /home/runner/work/simple-roulette/simple-roulette
