@@ -13,10 +13,10 @@ const runRoulette = (): void => {
   resultArea.innerHTML = pickOneFromCandidate(candidates);
 };
 
-const pickButton = document.getElementById("pick");
-
-if (!(pickButton instanceof HTMLButtonElement)) {
-  throw new Error("pick is not an HTMLButtonElement");
-}
-
-pickButton.addEventListener("click", runRoulette);
+((): void => {
+  const pickButton = document.getElementById("pick");
+  if (!(pickButton instanceof HTMLButtonElement)) {
+    throw new Error("pick is not an HTMLButtonElement");
+  }
+  pickButton.addEventListener("click", runRoulette);
+})();
