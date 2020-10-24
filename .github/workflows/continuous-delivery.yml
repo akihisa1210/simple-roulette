@@ -49,6 +49,8 @@ jobs:
           ${{ runner.os }}-node-
     - name: Install dependencies
       run: npm ci
+    - name: Build product
+      run: npm run build
     - name: Build test environment
       run: docker-compose up -d
     - name: e2e
