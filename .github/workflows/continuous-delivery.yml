@@ -55,7 +55,7 @@ jobs:
       uses: actions/upload-artifact@v1.0.0
       with:
         name: dist
-        path: /home/runner/work/simple-roulette/dist
+        path: /home/runner/work/simple-roulette/simple-roulette/dist
   e2e:
     needs: build
     runs-on: ubuntu-latest
@@ -83,7 +83,7 @@ jobs:
       uses: actions/download@v2.0.0
       with:
         name: dist
-        path: /home/runner/work/simple-roulette
+        path: /home/runner/work/simple-roulette/simple-roulette
     - name: Build test environment
       run: docker-compose up -d
     - name: e2e
@@ -109,7 +109,7 @@ jobs:
       uses: actions/download@v2.0.0
       with:
         name: dist
-        path: /home/runner/work/simple-roulette
+        path: /home/runner/work/simple-roulette/simple-roulette
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3.7.1
       with:
