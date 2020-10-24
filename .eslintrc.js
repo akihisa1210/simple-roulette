@@ -5,10 +5,17 @@ module.exports = {
     node: true,
     "cypress/globals": true,
   },
-  extends: ["eslint:recommended", "plugin:prettier/recommended"],
-  plugins: ["cypress"],
+  parser: "@typescript-eslint/parser",
+  extends: [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:prettier/recommended",
+    "prettier/@typescript-eslint",
+  ],
+  plugins: ["@typescript-eslint", "cypress", "prettier"],
   parserOptions: {
     ecmaVersion: 12,
+    project: ["./tsconfig.eslint.json"],
   },
   rules: {},
 };
