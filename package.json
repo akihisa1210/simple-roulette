@@ -4,10 +4,11 @@
   "description": "ブラウザで動くシンプルなルーレットです。",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint .",
+    "lint": "eslint './src/**/*.{js,ts}'",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
     "start": "docker-compose up",
     "deploy": "gh-pages -d public"
   },
@@ -22,12 +23,24 @@
   },
   "homepage": "https://github.com/akihisa1210/simple-roulette#readme",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.5.0",
+    "@typescript-eslint/parser": "^4.5.0",
+    "@webpack-cli/init": "^1.0.2",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "copy-webpack-plugin": "^6.2.1",
+    "css-loader": "^5.0.0",
     "cypress": "^5.1.0",
     "eslint": "^7.8.1",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-cypress": "^2.11.1",
     "eslint-plugin-prettier": "^3.1.4",
     "gh-pages": "^3.1.0",
-    "prettier": "^2.1.1"
+    "prettier": "^2.1.1",
+    "style-loader": "^2.0.0",
+    "terser-webpack-plugin": "^5.0.1",
+    "ts-loader": "^8.0.6",
+    "typescript": "^4.0.3",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^4.1.0"
   }
 }

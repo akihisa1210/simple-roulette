@@ -26,7 +26,7 @@ jobs:
         run: npm ci
       - name: lint
         run: npm run lint
-  e2e:
+  build:
     needs: lint
     runs-on: ubuntu-latest
     steps:
@@ -49,25 +49,15 @@ jobs:
           ${{ runner.os }}-node-
     - name: Install dependencies
       run: npm ci
-    - name: Build test environment
-      run: docker-compose up -d
-    - name: e2e
-      run: npm run cypress:run
-    - name: Upload error screenshots
-      if: ${{ failure() }}
+    - name: Build product
+      run: npm run build
+    - name: Upload build artifact
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: screenshots
-        path: /home/runner/work/simple-roulette/simple-roulette/cypress/screenshots
-    - name: Upload videos
-      if: ${{ always() }}
-      uses: actions/upload-artifact@v1.0.0
-      with:
-        name: videos
-        path: /home/runner/work/simple-roulette/simple-roulette/cypress/videos
-  deploy:
-    needs: e2e
-    if: github.ref == 'refs/heads/master'
+        name: dist
+        path: /home/runner/work/simple-roulette/simple-roulette/dist
+  e2e:
+    needs: build
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
@@ -89,8 +79,41 @@ jobs:
           ${{ runner.os }}-node-
     - name: Install dependencies
       run: npm ci
+    - name: Donwload build artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: dist
+        path: /home/runner/work/simple-roulette/simple-roulette/dist
+    - name: debug
+      run: pwd && ls -la
+    - name: Build test environment
+      run: docker-compose up -d
+    - name: e2e
+      run: npm run cypress:run
+    - name: Upload error screenshots
+      if: ${{ failure() }}
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: screenshots
+        path: /home/runner/work/simple-roulette/simple-roulette/cypress/screenshots
+    - name: Upload videos
+      if: ${{ always() }}
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: videos
+        path: /home/runner/work/simple-roulette/simple-roulette/cypress/videos
+  deploy:
+    needs: e2e
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+    - name: Donwload build artifact
+      uses: actions/download-artifact@v2
+      with:
+        name: dist
+        path: /home/runner/work/simple-roulette/simple-roulette/dist
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3.7.1
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./public
+        publish_dir: ./dist

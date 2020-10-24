@@ -6,6 +6,12 @@ https://akihisa1210.github.io/simple-roulette/
 
 ## Development
 
+### Build
+```
+npm run build
+```
+Destination folder is `./dist`.
+
 ### Start local server (docker-compose is required)
 ```
 npm start 
