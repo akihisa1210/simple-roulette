@@ -90,11 +90,23 @@
 /*!**********************!*\
   !*** ./src/index.ts ***!
   \**********************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("\nvar pickButton = document.getElementById(\"pick\");\nvar pickOneFromCandidate = function (candidates) {\n    return candidates[Math.floor(Math.random() * 100) % candidates.length];\n};\nvar runRoulette = function () {\n    var candidateArea = (document.getElementById(\"candidate-area\")); // TODO: Check the problem of type casting. e.g. null possibility\n    var candidates = candidateArea.value.split(/\\r\\n|\\n/);\n    var resultArea = document.getElementById(\"result-area\");\n    if (!resultArea) {\n        return;\n    }\n    resultArea.innerHTML = pickOneFromCandidate(candidates);\n};\npickButton.addEventListener(\"click\", runRoulette); // TODO: Remove null suppression\n\n\n//# sourceURL=webpack:///./src/index.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var src_roulette__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/roulette */ \"./src/roulette.ts\");\n\nvar runRoulette = function () {\n    var candidateArea = document.getElementById(\"candidate-area\");\n    if (!(candidateArea instanceof HTMLTextAreaElement)) {\n        throw new Error(\"pick is not an HTMLTextAreaElement\");\n    }\n    var candidates = candidateArea.value.split(/\\r\\n|\\n/);\n    var resultArea = document.getElementById(\"result-area\");\n    if (!(resultArea instanceof HTMLDivElement)) {\n        throw new Error(\"pick is not an HTMLDivElement\");\n    }\n    resultArea.innerHTML = Object(src_roulette__WEBPACK_IMPORTED_MODULE_0__[\"pickOneFromCandidate\"])(candidates);\n};\nvar pickButton = document.getElementById(\"pick\");\nif (!(pickButton instanceof HTMLButtonElement)) {\n    throw new Error(\"pick is not an HTMLButtonElement\");\n}\npickButton.addEventListener(\"click\", runRoulette);\n\n\n//# sourceURL=webpack:///./src/index.ts?");
+
+/***/ }),
+
+/***/ "./src/roulette.ts":
+/*!*************************!*\
+  !*** ./src/roulette.ts ***!
+  \*************************/
+/*! exports provided: pickOneFromCandidate */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"pickOneFromCandidate\", function() { return pickOneFromCandidate; });\nvar pickOneFromCandidate = function (candidates) {\n    return candidates[Math.floor(Math.random() * 100) % candidates.length];\n};\n\n\n//# sourceURL=webpack:///./src/roulette.ts?");
 
 /***/ })
 
