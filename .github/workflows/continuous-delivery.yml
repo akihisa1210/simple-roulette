@@ -83,7 +83,9 @@ jobs:
       uses: actions/download-artifact@v2
       with:
         name: dist
-        path: /home/runner/work/simple-roulette/simple-roulette
+        path: /home/runner/work/simple-roulette/simple-roulette/dist
+    - name: debug
+      run: pwd && ls -la
     - name: Build test environment
       run: docker-compose up -d
     - name: e2e
@@ -102,14 +104,14 @@ jobs:
         path: /home/runner/work/simple-roulette/simple-roulette/cypress/videos
   deploy:
     needs: e2e
-    # if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     steps:
     - name: Donwload build artifact
       uses: actions/download-artifact@v2
       with:
         name: dist
-        path: /home/runner/work/simple-roulette/simple-roulette
+        path: /home/runner/work/simple-roulette/simple-roulette/dist
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3.7.1
       with:
